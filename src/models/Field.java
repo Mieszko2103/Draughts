@@ -3,16 +3,24 @@ package models;
 public class Field {
 
     private Figure occupatedBy;
-
-    private int column;
     private int row;
+    private int column;
+    private boolean isActive;
 
-    public int getColumn() {
-        return column;
+
+    public Field(Figure occupatedBy, int row, int column, boolean isActive) {
+        this.occupatedBy = occupatedBy;
+        this.column = column;
+        this.row = row;
+        this.isActive = isActive;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
+    public void setOccupatedBy(Figure occupatedBy) {
+        this.occupatedBy = occupatedBy;
+    }
+
+    public Figure getOccupatedBy() {
+        return occupatedBy;
     }
 
     public int getRow() {
@@ -23,19 +31,16 @@ public class Field {
         this.row = row;
     }
 
-    public void setOccupatedBy(Figure occupatedBy) {
-        this.occupatedBy = occupatedBy;
+    public int getColumn() {
+        return column;
     }
 
-
-    public Field(Figure occupatedBy, int column, int row) {
-        this.occupatedBy = occupatedBy;
+    public void setColumn(int column) {
         this.column = column;
-        this.row = row;
     }
 
-    public Figure getOccupatedBy() {
-        return occupatedBy;
-    }
 
+    public boolean isActive() {
+        return isActive;
+    }
 }
