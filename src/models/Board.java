@@ -3,7 +3,7 @@ package models;
 import java.util.Scanner;
 
 public class Board {
-    Field[][] fields = new Field[9][9];
+    static Field[][] fields = new Field[9][9];
     boolean isWhiteTurn = true;
 
     public Board() {
@@ -45,26 +45,28 @@ public class Board {
         System.out.println("    A  B  C  D  E  F  G  H");
     }
 
-    public void turn() {
+    public void turn(boolean isWhiteTurn) {
         if (isWhiteTurn) {
+
+
+            chooseFigure(isWhiteTurn);
+
 
         }
     }
 
-    public Figure chooseFigure(Field[][] fields) {
-        String input;
+    public Figure chooseFigure(boolean isWhiteTurn) {
         int row = 0;
         int column = 0;
-
-        while ((column + row) % 2 == 0) {
-            if ((column + row) % 2 == 1) System.out.println("Wrong coordinates");
-            System.out.println("Choose column(A-H) and  row(1-8). expl ('A 1')");
+        while (fields[row][column].getOccupatedBy() != null && fields[row][column].getOccupatedBy().isWhite() == isWhiteTurn) {
+            if (isWhiteTurn) System.out.println("White's turn!");
+            else System.out.println("Black's turn!");
+            System.out.println("Choose row: ");
             Scanner in = new Scanner(System.in);
-            input = in.nextLine();
-            row = ((input.charAt(0)) - 65);
-            column = 8 - Integer.parseInt(input.substring(2, 3));
-            System.out.println(column + " " + row);
+            row = in.nextInt();
+            System.out.println("Choose column: ");
+            column = in.nextInt();
         }
-        return fields[column % 2][row].getOccupatedBy();
+        return fields[row][column].getOccupatedBy();
     }
 }

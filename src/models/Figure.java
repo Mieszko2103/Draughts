@@ -24,6 +24,9 @@ public class Figure {
         return courrentField;
     }
 
+    public boolean isWhite() {
+        return isWhite;
+    }
 
     public boolean move(Field moveTo) {
         if (moveTo.getOccupatedBy() != null && !moveTo.isActive()) {
@@ -57,7 +60,7 @@ public class Figure {
         if (moveTo.getOccupatedBy() != null ||
                 !moveTo.isActive() ||
                 attackOver.getOccupatedBy() != null &&
-                attackOver.getOccupatedBy().isWhite == this.isWhite) {
+                        attackOver.getOccupatedBy().isWhite == this.isWhite) {
             System.out.println("You can't attack like that");
             return false;
         } else if (((moveTo.getColumn() == (courrentField.getColumn() + 2)) && (moveTo.getRow() == (courrentField.getRow() - 2))) ||
@@ -69,8 +72,39 @@ public class Figure {
             moveTo.setOccupatedBy(this);
             this.courrentField = moveTo;
             return true;
-        } return false;
+        }
+        return false;
 
     }
 
+    public boolean canattack() {
+        if (this.getCourrentField().getRow() < 8 && this.getCourrentField().getColumn() < 8 &&
+                Board.fields[this.getCourrentField().getRow() + 1][this.getCourrentField().getColumn() + 1].getOccupatedBy() != null &&
+                Board.fields[this.getCourrentField().getRow() + 1][this.getCourrentField().getColumn() + 1].getOccupatedBy().isWhite != this.isWhite &&
+                Board.fields[this.getCourrentField().getRow() + 2][this.getCourrentField().getColumn() + 2].isActive() &&
+                Board.fields[this.getCourrentField().getRow() + 2][this.getCourrentField().getColumn() + 2].getOccupatedBy() == null)
+            return true;
+
+        if (this.getCourrentField().getRow() > 1 && this.getCourrentField().getColumn() < 8 &&
+                Board.fields[this.getCourrentField().getRow() - 1][this.getCourrentField().getColumn() + 1].getOccupatedBy() != null &&
+                Board.fields[this.getCourrentField().getRow() - 1][this.getCourrentField().getColumn() + 1].getOccupatedBy().isWhite != this.isWhite &&
+                Board.fields[this.getCourrentField().getRow() - 2][this.getCourrentField().getColumn() + 2].isActive() &&
+                Board.fields[this.getCourrentField().getRow() - 2][this.getCourrentField().getColumn() + 2].getOccupatedBy() == null)
+            return true;
+
+        if (this.getCourrentField().getRow() > 1 && this.getCourrentField().getColumn() > 1 &&
+                Board.fields[this.getCourrentField().getRow() - 1][this.getCourrentField().getColumn() - 1].getOccupatedBy() != null &&
+                Board.fields[this.getCourrentField().getRow() - 1][this.getCourrentField().getColumn() - 1].getOccupatedBy().isWhite != this.isWhite &&
+                Board.fields[this.getCourrentField().getRow() - 2][this.getCourrentField().getColumn() - 2].isActive() &&
+                Board.fields[this.getCourrentField().getRow() - 2][this.getCourrentField().getColumn() - 2].getOccupatedBy() == null)
+            return true;
+
+        if (this.getCourrentField().getRow() < 8 && this.getCourrentField().getColumn() > 1 &&
+                Board.fields[this.getCourrentField().getRow() + 1][this.getCourrentField().getColumn() - 1].getOccupatedBy() != null &&
+                Board.fields[this.getCourrentField().getRow() + 1][this.getCourrentField().getColumn() - 1].getOccupatedBy().isWhite != this.isWhite &&
+                Board.fields[this.getCourrentField().getRow() + 2][this.getCourrentField().getColumn() - 2].isActive() &&
+                Board.fields[this.getCourrentField().getRow() + 2][this.getCourrentField().getColumn() - 2].getOccupatedBy() == null)
+            return true;
+        return false;
+    }
 }
