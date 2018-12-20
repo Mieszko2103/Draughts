@@ -29,6 +29,7 @@ public class Main {
         System.out.println(board.getField(1,1).getOccupatedBy().canattack());
         System.out.println(board.getField(6,2).getOccupatedBy().canattack());
         System.out.println(board.getField(3,7).getOccupatedBy().canattack());
+        board.chooseField();
     }
 
 }

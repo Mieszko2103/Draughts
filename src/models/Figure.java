@@ -56,27 +56,6 @@ public class Figure {
         return false;
     }
 
-    public boolean attack(Field moveTo, Field attackOver) {
-        if (moveTo.getOccupatedBy() != null ||
-                !moveTo.isActive() ||
-                attackOver.getOccupatedBy() != null &&
-                        attackOver.getOccupatedBy().isWhite == this.isWhite) {
-            System.out.println("You can't attack like that");
-            return false;
-        } else if (((moveTo.getColumn() == (courrentField.getColumn() + 2)) && (moveTo.getRow() == (courrentField.getRow() - 2))) ||
-                ((moveTo.getColumn() == (courrentField.getColumn() + 2)) && (moveTo.getRow() == (courrentField.getRow() + 2))) ||
-                ((moveTo.getColumn() == (courrentField.getColumn() - 2)) && (moveTo.getRow() == (courrentField.getRow() - 2))) ||
-                ((moveTo.getColumn() == (courrentField.getColumn() - 2)) && (moveTo.getRow() == (courrentField.getRow() + 2)))) {
-            courrentField.setOccupatedBy(null);
-            attackOver.setOccupatedBy(null);
-            moveTo.setOccupatedBy(this);
-            this.courrentField = moveTo;
-            return true;
-        }
-        return false;
-
-    }
-
     public boolean canattack() {
         if (this.getCourrentField().getRow() < 8 && this.getCourrentField().getColumn() < 8 &&
                 Board.fields[this.getCourrentField().getRow() + 1][this.getCourrentField().getColumn() + 1].getOccupatedBy() != null &&
@@ -107,4 +86,27 @@ public class Figure {
             return true;
         return false;
     }
+
+    public boolean attack(Field moveTo, Field attackOver) {
+        if (moveTo.getOccupatedBy() != null ||
+                !moveTo.isActive() ||
+                attackOver.getOccupatedBy() != null &&
+                        attackOver.getOccupatedBy().isWhite == this.isWhite) {
+            System.out.println("You can't attack like that");
+            return false;
+        } else if (((moveTo.getColumn() == (courrentField.getColumn() + 2)) && (moveTo.getRow() == (courrentField.getRow() - 2))) ||
+                ((moveTo.getColumn() == (courrentField.getColumn() + 2)) && (moveTo.getRow() == (courrentField.getRow() + 2))) ||
+                ((moveTo.getColumn() == (courrentField.getColumn() - 2)) && (moveTo.getRow() == (courrentField.getRow() - 2))) ||
+                ((moveTo.getColumn() == (courrentField.getColumn() - 2)) && (moveTo.getRow() == (courrentField.getRow() + 2)))) {
+            courrentField.setOccupatedBy(null);
+            attackOver.setOccupatedBy(null);
+            moveTo.setOccupatedBy(this);
+            this.courrentField = moveTo;
+            return true;
+        }
+        return false;
+
+    }
+
+
 }

@@ -51,7 +51,6 @@ public class Board {
 
             chooseFigure(isWhiteTurn);
 
-
         }
     }
 
@@ -68,5 +67,19 @@ public class Board {
             column = in.nextInt();
         }
         return fields[row][column].getOccupatedBy();
+    }
+
+    public Field chooseField(){
+        Field choice = null;
+        Scanner in = new Scanner(System.in);
+        while (choice==null || !choice.isActive()){
+            System.out.println("Choose row: ");
+            int row = in.nextInt();
+            System.out.println("Choose column: ");
+            int column = in.nextInt();
+            choice=fields[row][column];
+            if (choice==null || !choice.isActive()) System.out.println("Wrong coordinates, again.");
+        }
+        return choice;
     }
 }
